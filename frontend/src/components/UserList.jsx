@@ -3,7 +3,9 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 
 const UserList = () => {
-    const [users, setUser] = useState([])
+    const [users, setUser] = useState([] as any[]);
+
+
 
     useEffect(()=> {
         getUsers()
@@ -40,28 +42,26 @@ const UserList = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
-              <tr key={user.id}>
-                <td>{index + 1}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.gender}</td>
-                <td>
-                  <Link
-                    to={`edit/${user.id}`}
-                    className="button is-small is-info mr-2"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    onClick={() => deleteUser(user.id)}
-                    className="button is-small is-danger"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {
+                  users.map((user, index) => (
+                  <tr key={user.id}>
+                    <td>{index + 1}</td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.gender}</td>
+
+                    <td>
+                      <Link to={`edit/${user.id}`} className="button is-small is-info mr-2">
+                        Edit
+                      </Link>
+                      <button onClick={() => deleteUser(user.id)} className="button is-small is-danger">
+                        Delete
+                      </button>
+                    </td>
+                    
+                  </tr>
+                ))
+            }
           </tbody>
         </table>
       </div>
